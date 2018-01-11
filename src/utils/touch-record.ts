@@ -38,7 +38,7 @@ export class Tracker {
 }
 
 export class TouchRecord {
-  private _lastTouch: Tracker;
+  public _lastTouch: Tracker;
   private _activeTouchID: number;
   private _touchList: { [id: number]: Tracker } = {};
 
