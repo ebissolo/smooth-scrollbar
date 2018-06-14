@@ -420,8 +420,8 @@ Detail:
 
 ```ts
 type Metrics = {
-  width: number,
-  height: number
+  width: number | null,
+  height: number | null
 };
 ```
 
@@ -429,8 +429,8 @@ Set a new size for scrollbar content element. How to easily use:
 
 ```js
 var size = {
-  width: 500 | null,
-  height: 500 | null
+  width: 500,
+  height: 500
 };
 
 scrollbar.setContentSize(size);
