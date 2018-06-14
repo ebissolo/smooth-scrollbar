@@ -55,6 +55,18 @@ export class Options {
    */
   readonly plugins: any = {};
 
+  /**
+   * Minimal size for scrollbar thumbs.
+   */
+  @range(0, Infinity)
+  contentWidth = 0;
+
+  /**
+   * Minimal size for scrollbar thumbs.
+   */
+  @range(0, Infinity)
+  contentHeight = 0;
+
   constructor(config: Partial<ScrollbarOptions> = {}) {
     Object.keys(config).forEach((prop) => {
       this[prop] = config[prop];

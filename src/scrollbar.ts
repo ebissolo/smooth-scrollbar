@@ -34,6 +34,7 @@ import {
 import * as eventHandlers from './events/';
 
 import * as I from './interfaces/';
+import { Metrics } from './interfaces/';
 
 // DO NOT use WeakMap here
 // .getAll() methods requires `scrollbarMap.values()`
@@ -161,6 +162,8 @@ export class Scrollbar implements I.Scrollbar {
 
     // mount content
     contentEl.className = 'scroll-content';
+    contentEl.style.width = this.options.contentWidth + 'px';
+    contentEl.style.height = this.options.contentHeight + 'px';
 
     Array.from(containerEl.childNodes).forEach((node) => {
       contentEl.appendChild(node);
@@ -213,6 +216,27 @@ export class Scrollbar implements I.Scrollbar {
    */
   getSize(): I.ScrollbarSize {
     return getSize(this);
+  }
+
+  /**
+   * Sets content size and update geometry
+   * @param size
+   */
+  setContentSize( size: Metrics ) {
+    let update: boolean = false;
+
+    if ( size.width != null ) {
+      this.options.contentWidth = size.width;
+      update = true;
+    }
+    if ( size.height != null ) {
+      this.options.contentHeight = size.height;
+      update = true;
+    }
+
+    if ( update ) {
+      this.update();
+    }
   }
 
   /**

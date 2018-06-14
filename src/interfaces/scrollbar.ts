@@ -13,6 +13,8 @@ export type ScrollbarOptions = {
   continuousScrolling: boolean,
   wheelEventTarget: EventTarget | null,
   plugins: any,
+  contentWidth?: number,
+  contentHeight?: number
 };
 
 // Scrollbar.size

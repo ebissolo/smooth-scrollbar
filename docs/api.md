@@ -30,6 +30,7 @@ In this documentation, we are using `Scrollbar` (in capitalized) to represent th
   - [scrollbar.scrollTop](#scrollbarscrolltop)
   - [scrollbar.track](#scrollbartrack)
   - [scrollbar.getSize()](#scrollbargetsize)
+  - [scrollbar.setContentSize()](#scrollbarsetcontentsize)
   - [scrollbar.update()](#scrollbarupdate)
   - [scrollbar.setPosition()](#scrollbarsetposition)
   - [scrollbar.scrollTo()](#scrollbarscrollto)
@@ -241,6 +242,8 @@ type ScrollbarOptions = {
   continuousScrolling: boolean,
   wheelEventTarget: EventTarget | null,
   plugins: any,
+  contentWidth: number | null,
+  contentHeight: number | null
 };
 ```
 
@@ -402,6 +405,39 @@ Returns the size of the scrollbar container element and the content wrapper elem
         height: 3000
     }
 }
+```
+
+### scrollbar.setContentSize()
+
+```js
+scrollbar.setContentSize(size): void
+```
+| Param | Type | Description |
+| --- | :-: | --- |
+| `size` | `Metrics`, _optional_ | New content size |
+
+Detail:
+
+```ts
+type Metrics = {
+  width: number,
+  height: number
+};
+```
+
+Set a new size for scrollbar content element. How to easily use:
+
+```js
+var size = {
+  width: 500 | null,
+  height: 500 | null
+};
+
+scrollbar.setContentSize(size);
+
+// Changed options
+console.log(scrollbar.options.contentWidth); // 500
+console.log(scrollbar.options.contentHeight); // 500 
 ```
 
 ### scrollbar.update()

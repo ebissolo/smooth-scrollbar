@@ -28,6 +28,10 @@ export function update(scrollbar: Scrollbar) {
   // update tracks
   scrollbar.track.update();
 
+  // update content element size
+  scrollbar.contentEl.style.width = scrollbar.options.contentWidth + 'px';
+  scrollbar.contentEl.style.height = scrollbar.options.contentHeight + 'px';
+
   // re-positioning
   scrollbar.setPosition();
 }

@@ -10,6 +10,8 @@ const options = {
   renderByPixels: !('ontouchstart' in document),
   alwaysShowTracks: false,
   continuousScrolling: true,
+  contentWidth: window.innerWidth,
+  contentHeight: window.innerHeight,
 };
 
 const overscrollOptions = {
@@ -65,6 +67,8 @@ f1.open();
   f1.add(options, 'renderByPixels'),
   f1.add(options, 'alwaysShowTracks'),
   f1.add(options, 'continuousScrolling'),
+  f1.add(options, 'contentWidth', 0),
+  f1.add(options, 'contentHeight', 0),
 ].forEach((ctrl) => {
   ctrl.onChange(updateScrollbar);
 });
