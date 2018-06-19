@@ -40,6 +40,17 @@ export class ScrollbarThumb implements I.ScrollbarThumb {
     trackEl.appendChild(this.element);
   }
 
+  /**
+   * @param  {string} color
+   */
+  setColor( color: string ) {
+    if ( typeof color === 'string' ) {
+      setStyle( this.element, {
+        backgroundColor: color,
+      } );
+    }
+  }
+
   update(
     scrollOffset: number,
     containerSize: number,
