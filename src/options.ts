@@ -4,7 +4,7 @@ import {
 } from './decorators/';
 
 import {
-  ScrollbarOptions,
+  ScrollbarOptions, Customizations,
 } from './interfaces/';
 
 export class Options {
@@ -56,16 +56,18 @@ export class Options {
   readonly plugins: any = {};
 
   /**
-   * Minimal size for scrollbar thumbs.
+   * This object is used to customize scrollbar tracks and thumbs
    */
-  @range(0, Infinity)
-  contentWidth = 0;
-
-  /**
-   * Minimal size for scrollbar thumbs.
-   */
-  @range(0, Infinity)
-  contentHeight = 0;
+  customizeOptions: Customizations = {
+    contentWidth: null,
+    contentHeight: null,
+    xAxisSize: null,
+    yAxisSize: null,
+    xAxisColor: null,
+    yAxisColor: null,
+    xThumbColor: null,
+    yThumbColor: null,
+  };
 
   constructor(config: Partial<ScrollbarOptions> = {}) {
     Object.keys(config).forEach((prop) => {

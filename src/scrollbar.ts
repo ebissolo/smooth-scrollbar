@@ -162,8 +162,6 @@ export class Scrollbar implements I.Scrollbar {
 
     // mount content
     contentEl.className = 'scroll-content';
-    contentEl.style.width = this.options.contentWidth + 'px';
-    contentEl.style.height = this.options.contentHeight + 'px';
 
     Array.from(containerEl.childNodes).forEach((node) => {
       contentEl.appendChild(node);
@@ -223,17 +221,85 @@ export class Scrollbar implements I.Scrollbar {
    * @param size
    */
   setContentSize( size: Metrics ) {
+    if ( size == null ) { console.error( 'Invalid size' ); return; }
+
     let update: boolean = false;
 
     if ( size.width != null ) {
-      this.options.contentWidth = size.width;
+      this.options.customizeOptions.contentWidth = size.width;
       update = true;
     }
     if ( size.height != null ) {
-      this.options.contentHeight = size.height;
+      this.options.customizeOptions.contentHeight = size.height;
       update = true;
     }
 
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {number} size
+   */
+  setXAxisSize( size: number ) {
+    if ( size == null || typeof size === 'string' ) { console.error( 'Invalid size' ); }
+    this.options.customizeOptions.xAxisSize = size;
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {number} size
+   */
+  setYAxisSize( size: number ) {
+    if ( size == null || typeof size === 'string' ) { console.error( 'Invalid size' ); }
+    this.options.customizeOptions.yAxisSize = size;
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {string} color
+   */
+  setXAxisColor( color: string ) {
+    if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
+    this.options.customizeOptions.xAxisColor = color;
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {string} color
+   */
+  setYAxisColor( color: string ) {
+    if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
+    this.options.customizeOptions.yAxisColor = color;
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {string} color
+   */
+  setXThumbColor( color: string ) {
+    if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
+    this.options.customizeOptions.xThumbColor = color;
+    if ( update ) {
+      this.update();
+    }
+  }
+
+  /**
+   * @param  {string} color
+   */
+  setYThumbColor( color: string ) {
+    if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
+    this.options.customizeOptions.yThumbColor = color;
     if ( update ) {
       this.update();
     }

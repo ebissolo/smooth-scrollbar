@@ -57,7 +57,7 @@ let lastOffset = 0;
 let reduceAmount = 0;
 
 const monitorOptions = {
-  show: window.innerWidth > 600,
+  show: false,
   data: 'offset',
   duration: 5,
   reset() {

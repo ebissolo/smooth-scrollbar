@@ -4,6 +4,17 @@ import {
 
 import { Data2d } from './data-2d';
 
+export type Customizations = {
+  contentWidth: number | null,
+  contentHeight: number | null,
+  xAxisSize: number | null,
+  yAxisSize: number | null,
+  xAxisColor: string | null,
+  yAxisColor: string | null,
+  xThumbColor: string | null,
+  yThumbColor: string | null,
+};
+
 // Scrollbar.options
 export type ScrollbarOptions = {
   damping: number,
@@ -13,8 +24,7 @@ export type ScrollbarOptions = {
   continuousScrolling: boolean,
   wheelEventTarget: EventTarget | null,
   plugins: any,
-  contentWidth?: number,
-  contentHeight?: number
+  customizeOptions: Customizations,
 };
 
 // Scrollbar.size

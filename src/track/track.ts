@@ -21,7 +21,6 @@ export class ScrollbarTrack implements I.ScrollbarTrack {
     direction: TrackDirection,
     thumbMinSize: number = 0,
   ) {
-    this.direction = direction;
     this.element.className = `scrollbar-track scrollbar-track-${direction}`;
 
     this.thumb = new ScrollbarThumb(
@@ -63,40 +62,6 @@ export class ScrollbarTrack implements I.ScrollbarTrack {
 
     this._isShown = false;
     this.element.classList.remove('show');
-  }
-
-  /**
-   * @param  {number} dim
-   * @returns void
-   */
-  setSize( dim: number ): void {
-    if ( this.direction === 'x' ) {
-      setStyle( this.element, {
-        height: dim + 'px',
-      } );
-      setStyle( this.thumb.element, {
-        height: dim + 'px',
-      } );
-    } else {
-      setStyle( this.element, {
-        width: dim + 'px',
-      } );
-      setStyle( this.thumb.element, {
-        width: dim + 'px',
-      } );
-    }
-  }
-
-  /**
-   * @param  {string} color
-   * @returns void
-   */
-  setColor( color: string ): void {
-    if ( typeof color === 'string' ) {
-      setStyle( this.element, {
-        backgroundColor: color,
-      } );
-    }
   }
 
   update(

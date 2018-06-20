@@ -10,8 +10,16 @@ const options = {
   renderByPixels: !('ontouchstart' in document),
   alwaysShowTracks: false,
   continuousScrolling: true,
-  contentWidth: window.innerWidth,
-  contentHeight: window.innerHeight,
+  customizeOptions: {
+    contentWidth: 7000,
+    contentHeight: 7000,
+    xAxisSize: 20,
+    yAxisSize: 20,
+    xAxisColor: 'gray',
+    yAxisColor: 'gray',
+    xThumbColor: 'black',
+    yThumbColor: 'black',
+  },
 };
 
 const overscrollOptions = {
@@ -58,6 +66,22 @@ function updateScrollbar() {
   });
 }
 
+const f0 = controller.addFolder( 'Customization Options' );
+f0.open();
+
+[
+  f0.add( options.customizeOptions, 'contentWidth' ),
+  f0.add( options.customizeOptions, 'contentHeight' ),
+  f0.add( options.customizeOptions, 'xAxisSize' ),
+  f0.add( options.customizeOptions, 'yAxisSize' ),
+  f0.add( options.customizeOptions, 'xAxisColor' ),
+  f0.add( options.customizeOptions, 'yAxisColor' ),
+  f0.add( options.customizeOptions, 'xThumbColor' ),
+  f0.add( options.customizeOptions, 'yThumbColor' ),
+].forEach((ctrl) => {
+  ctrl.onChange(updateScrollbar);
+});
+
 const f1 = controller.addFolder('Scrollbar Options');
 f1.open();
 
@@ -67,8 +91,6 @@ f1.open();
   f1.add(options, 'renderByPixels'),
   f1.add(options, 'alwaysShowTracks'),
   f1.add(options, 'continuousScrolling'),
-  f1.add(options, 'contentWidth', 0),
-  f1.add(options, 'contentHeight', 0),
 ].forEach((ctrl) => {
   ctrl.onChange(updateScrollbar);
 });

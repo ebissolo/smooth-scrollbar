@@ -46,9 +46,7 @@ export const globalPlugins: PluginMap = {
   constructors: {},
 };
 
-export function addPlugins(
-  ...Plugins: (typeof ScrollbarPlugin)[],
-): void {
+export function addPlugins(...Plugins: (typeof ScrollbarPlugin)[]): void {
   Plugins.forEach((P) => {
     const { pluginName } = P;
 
