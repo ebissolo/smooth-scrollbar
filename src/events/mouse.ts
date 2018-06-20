@@ -116,7 +116,7 @@ export function mouseHandler(scrollbar: I.Scrollbar) {
     });
   });
 
-  addEvent(container, 'mousemove', (evt) => {
+  addEvent(window, 'mousemove', (evt) => {
     if (!isMouseDown) return;
 
     isMouseMoving = true;
@@ -144,7 +144,7 @@ export function mouseHandler(scrollbar: I.Scrollbar) {
     }
   });
 
-  addEvent(container, 'mouseup blur', () => {
+  addEvent(window, 'mouseup blur', () => {
     isMouseDown = isMouseMoving = false;
 
     setStyle(scrollbar.containerEl, {

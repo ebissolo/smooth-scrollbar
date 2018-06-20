@@ -8,11 +8,29 @@ const options = {
   damping: 0.1,
   thumbMinSize: 20,
   renderByPixels: !('ontouchstart' in document),
-  alwaysShowTracks: false,
+  alwaysShowTracks: true,
   continuousScrolling: true,
   customizeOptions: {
-    contentWidth: 7000,
-    contentHeight: 7000,
+    contentWidth: 1000,
+    contentHeight: 4000,
+    xAxisSize: 20,
+    yAxisSize: 20,
+    xAxisColor: 'gray',
+    yAxisColor: 'gray',
+    xThumbColor: 'black',
+    yThumbColor: 'black',
+  },
+};
+
+const optionsInner = {
+  damping: 0.1,
+  thumbMinSize: 20,
+  renderByPixels: !('ontouchstart' in document),
+  alwaysShowTracks: true,
+  continuousScrolling: true,
+  customizeOptions: {
+    contentWidth: 400,
+    contentHeight: 300,
     xAxisSize: 20,
     yAxisSize: 20,
     xAxisColor: 'gray',
@@ -32,14 +50,14 @@ const overscrollOptions = {
 
 const scrollbars = [
   Scrollbar.init(document.getElementById('main-scrollbar') as HTMLElement, {
-    ...options,
     wheelEventTarget: document,
+    ...options,
     plugins: {
       overscroll: { ...overscrollOptions },
     },
   }),
   Scrollbar.init(document.getElementById('inner-scrollbar') as HTMLElement, {
-    ...options,
+    ...optionsInner,
     plugins: {
       overscroll: { ...overscrollOptions },
     },
@@ -47,40 +65,43 @@ const scrollbars = [
 ];
 const controller = new dat.GUI();
 
-function updateScrollbar() {
-  scrollbars.forEach((s) => {
-    // real-time options
-    Object.assign(s.options, options);
-    s.updatePluginOptions('overscroll', {
-      ...overscrollOptions,
-      effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
-    });
+function updateMainScrollbar() {
+  let s0 = scrollbars[0];
 
-    if (options.alwaysShowTracks) {
-      s.track.xAxis.show();
-      s.track.yAxis.show();
-    } else {
-      s.track.xAxis.hide();
-      s.track.yAxis.hide();
-    }
+  // real-time options for main-scrollbar
+  Object.assign(s0.options, options);
+  s0.updatePluginOptions('overscroll', {
+    ...overscrollOptions,
+    effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
   });
+
+  if (options.alwaysShowTracks) {
+    s0.track.xAxis.show();
+    s0.track.yAxis.show();
+  } else {
+    s0.track.xAxis.hide();
+    s0.track.yAxis.hide();
+  }
 }
 
-const f0 = controller.addFolder( 'Customization Options' );
-f0.open();
+function updateInnerScrollbar() {
+  let s1 = scrollbars[1];
 
-[
-  f0.add( options.customizeOptions, 'contentWidth' ),
-  f0.add( options.customizeOptions, 'contentHeight' ),
-  f0.add( options.customizeOptions, 'xAxisSize' ),
-  f0.add( options.customizeOptions, 'yAxisSize' ),
-  f0.add( options.customizeOptions, 'xAxisColor' ),
-  f0.add( options.customizeOptions, 'yAxisColor' ),
-  f0.add( options.customizeOptions, 'xThumbColor' ),
-  f0.add( options.customizeOptions, 'yThumbColor' ),
-].forEach((ctrl) => {
-  ctrl.onChange(updateScrollbar);
-});
+  // real-time options for inner-scrollbar
+  Object.assign(s1.options, optionsInner);
+  s1.updatePluginOptions('overscroll', {
+    ...overscrollOptions,
+    effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
+  });
+
+  if (options.alwaysShowTracks) {
+    s1.track.xAxis.show();
+    s1.track.yAxis.show();
+  } else {
+    s1.track.xAxis.hide();
+    s1.track.yAxis.hide();
+  }
+}
 
 const f1 = controller.addFolder('Scrollbar Options');
 f1.open();
@@ -92,7 +113,7 @@ f1.open();
   f1.add(options, 'alwaysShowTracks'),
   f1.add(options, 'continuousScrolling'),
 ].forEach((ctrl) => {
-  ctrl.onChange(updateScrollbar);
+  ctrl.onChange(updateMainScrollbar);
 });
 
 const f2 = controller.addFolder('Overscroll Plugin Options');
@@ -103,7 +124,39 @@ const f2 = controller.addFolder('Overscroll Plugin Options');
   f2.add(overscrollOptions, 'maxOverscroll', 30, 300),
   f2.addColor(overscrollOptions, 'glowColor'),
 ].forEach((ctrl) => {
-  ctrl.onChange(updateScrollbar);
+  ctrl.onChange(updateMainScrollbar);
+});
+
+const f3 = controller.addFolder( 'Main Scrollbar Customization' );
+f3.open();
+
+[
+  f3.add( options.customizeOptions, 'contentWidth' ),
+  f3.add( options.customizeOptions, 'contentHeight' ),
+  f3.add( options.customizeOptions, 'xAxisSize' ),
+  f3.add( options.customizeOptions, 'yAxisSize' ),
+  f3.add( options.customizeOptions, 'xAxisColor' ),
+  f3.add( options.customizeOptions, 'yAxisColor' ),
+  f3.add( options.customizeOptions, 'xThumbColor' ),
+  f3.add( options.customizeOptions, 'yThumbColor' ),
+].forEach((ctrl) => {
+  ctrl.onChange(updateMainScrollbar);
+});
+
+const f4 = controller.addFolder( 'Inner Scrollbar Customization' );
+f4.open();
+
+[
+  f4.add( optionsInner.customizeOptions, 'contentWidth' ),
+  f4.add( optionsInner.customizeOptions, 'contentHeight' ),
+  f4.add( optionsInner.customizeOptions, 'xAxisSize' ),
+  f4.add( optionsInner.customizeOptions, 'yAxisSize' ),
+  f4.add( optionsInner.customizeOptions, 'xAxisColor' ),
+  f4.add( optionsInner.customizeOptions, 'yAxisColor' ),
+  f4.add( optionsInner.customizeOptions, 'xThumbColor' ),
+  f4.add( optionsInner.customizeOptions, 'yThumbColor' ),
+].forEach((ctrl) => {
+  ctrl.onChange(updateInnerScrollbar);
 });
 
 const el = document.getElementById('controller');

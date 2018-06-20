@@ -233,7 +233,6 @@ export class Scrollbar implements I.Scrollbar {
       this.options.customizeOptions.contentHeight = size.height;
       update = true;
     }
-
     if ( update ) {
       this.update();
     }

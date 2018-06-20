@@ -2,6 +2,11 @@ const TRACK_BG = 'rgba(222, 222, 222, .75)';
 const THUMB_BG = 'rgba(0, 0, 0, .5)';
 
 const SCROLLBAR_STYLE = `
+[data-scrollbar] {
+  display: block;
+  position: relative;
+}
+
 .scroll-content {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
