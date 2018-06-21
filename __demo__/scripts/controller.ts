@@ -84,22 +84,60 @@ function updateMainScrollbar() {
   }
 }
 
-function updateInnerScrollbar() {
+// function updateInnerScrollbar() {
+//   let s1 = scrollbars[1];
+
+//   // real-time options for inner-scrollbar
+//   Object.assign(s1.options, optionsInner);
+//   s1.updatePluginOptions('overscroll', {
+//     ...overscrollOptions,
+//     effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
+//   });
+
+//   if (options.alwaysShowTracks) {
+//     s1.track.xAxis.show();
+//     s1.track.yAxis.show();
+//   } else {
+//     s1.track.xAxis.hide();
+//     s1.track.yAxis.hide();
+//   }
+// }
+
+function updateMainStyles( ctrl ) {
+  let property = ctrl.property;
+  let value = ctrl.getValue();
+  let s0 = scrollbars[0];
+
+  switch ( property ) {
+    case 'contentWidth':
+    case 'contentHeight':
+      s0.setContentSize(value);
+      break;
+    case 'xAxisSize': s0.setXAxisSize(value);break;
+    case 'yAxisSize': s0.setYAxisSize(value);break;
+    case 'xAxisColor': s0.setXAxisColor(value);break;
+    case 'yAxisColor': s0.setYAxisColor(value);break;
+    case 'xThumbColor': s0.setXThumbColor(value);break;
+    case 'yThumbColor': s0.setYThumbColor(value);break;
+  }
+}
+
+function updateInnerStyles( ctrl: dat.GUIController ) {
+  let property = ctrl.property;
+  let value = ctrl.getValue();
   let s1 = scrollbars[1];
 
-  // real-time options for inner-scrollbar
-  Object.assign(s1.options, optionsInner);
-  s1.updatePluginOptions('overscroll', {
-    ...overscrollOptions,
-    effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
-  });
-
-  if (options.alwaysShowTracks) {
-    s1.track.xAxis.show();
-    s1.track.yAxis.show();
-  } else {
-    s1.track.xAxis.hide();
-    s1.track.yAxis.hide();
+  switch ( property ) {
+    case 'contentWidth':
+    case 'contentHeight':
+      s1.setContentSize(value);
+      break;
+    case 'xAxisSize': s1.setXAxisSize(value);break;
+    case 'yAxisSize': s1.setYAxisSize(value);break;
+    case 'xAxisColor': s1.setXAxisColor(value);break;
+    case 'yAxisColor': s1.setYAxisColor(value);break;
+    case 'xThumbColor': s1.setXThumbColor(value);break;
+    case 'yThumbColor': s1.setYThumbColor(value);break;
   }
 }
 
@@ -140,7 +178,10 @@ f3.open();
   f3.add( options.customizeOptions, 'xThumbColor' ),
   f3.add( options.customizeOptions, 'yThumbColor' ),
 ].forEach((ctrl) => {
-  ctrl.onChange(updateMainScrollbar);
+  let controller = ctrl;
+  ctrl.onChange(() => {
+    updateMainStyles(controller);
+  });
 });
 
 const f4 = controller.addFolder( 'Inner Scrollbar Customization' );
@@ -156,7 +197,10 @@ f4.open();
   f4.add( optionsInner.customizeOptions, 'xThumbColor' ),
   f4.add( optionsInner.customizeOptions, 'yThumbColor' ),
 ].forEach((ctrl) => {
-  ctrl.onChange(updateInnerScrollbar);
+  let controller = ctrl;
+  ctrl.onChange(() => {
+    updateInnerStyles(controller);
+  });
 });
 
 const el = document.getElementById('controller');
