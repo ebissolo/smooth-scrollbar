@@ -34,7 +34,7 @@ import {
 import * as eventHandlers from './events/';
 
 import * as I from './interfaces/';
-import { Metrics } from './interfaces/';
+import { Metrics, SCROLL_RENDER } from './interfaces/';
 
 // DO NOT use WeakMap here
 // .getAll() methods requires `scrollbarMap.values()`
@@ -135,10 +135,24 @@ export class Scrollbar implements I.Scrollbar {
   private _momentum = { x: 0, y: 0 };
   private _listeners = new Set<I.ScrollListener>();
 
+  private _renderMask = 0;
+  private _renderFlags: SCROLL_RENDER;
+
   constructor(
     containerEl: HTMLElement,
     options?: Partial<I.ScrollbarOptions>,
   ) {
+
+    this._renderFlags = {
+      CONTENT_SIZE: 1,
+      XAXIS_SIZE: 2,
+      YAXIS_SIZE: 4,
+      XAXIS_COLOR: 8,
+      YAXIS_COLOR: 16,
+      XTHUMB_COLOR: 32,
+      YTHUMB_COLOR: 64,
+    };
+
     this.containerEl = containerEl;
     const contentEl = this.contentEl = document.createElement('div');
 
@@ -177,6 +191,15 @@ export class Scrollbar implements I.Scrollbar {
 
     // init plugins
     this._plugins = initPlugins(this, this.options.plugins);
+
+    // scrollbar styles rendering
+    this._renderMask = this._renderFlags.CONTENT_SIZE |
+                       this._renderFlags.XAXIS_SIZE |
+                       this._renderFlags.YAXIS_SIZE |
+                       this._renderFlags.XAXIS_COLOR |
+                       this._renderFlags.YAXIS_COLOR |
+                       this._renderFlags.XTHUMB_COLOR |
+                       this._renderFlags.YTHUMB_COLOR;
 
     // preserve scroll offset
     const { scrollLeft, scrollTop } = containerEl;
@@ -217,6 +240,28 @@ export class Scrollbar implements I.Scrollbar {
   }
 
   /**
+   * @returns number
+   */
+  getRenderMask(): number {
+    return this._renderMask;
+  }
+
+  /**
+   * @returns SCROLL_RENDER
+   */
+  getRenderFlags(): SCROLL_RENDER {
+    return this._renderFlags;
+  }
+
+  /**
+   * @param  {number} value
+   * @returns void
+   */
+  setRenderMask( value: number ): void {
+    this._renderMask = value;
+  }
+
+  /**
    * Sets content size and update geometry
    * @param size
    */
@@ -233,9 +278,10 @@ export class Scrollbar implements I.Scrollbar {
       this.options.customizeOptions.contentHeight = size.height;
       update = true;
     }
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.CONTENT_SIZE;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -244,9 +290,10 @@ export class Scrollbar implements I.Scrollbar {
   setXAxisSize( size: number ) {
     if ( size == null || typeof size === 'string' ) { console.error( 'Invalid size' ); }
     this.options.customizeOptions.xAxisSize = size;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.XAXIS_SIZE;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -255,9 +302,10 @@ export class Scrollbar implements I.Scrollbar {
   setYAxisSize( size: number ) {
     if ( size == null || typeof size === 'string' ) { console.error( 'Invalid size' ); }
     this.options.customizeOptions.yAxisSize = size;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.YAXIS_SIZE;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -266,9 +314,10 @@ export class Scrollbar implements I.Scrollbar {
   setXAxisColor( color: string ) {
     if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
     this.options.customizeOptions.xAxisColor = color;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.XAXIS_COLOR;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -277,9 +326,10 @@ export class Scrollbar implements I.Scrollbar {
   setYAxisColor( color: string ) {
     if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
     this.options.customizeOptions.yAxisColor = color;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.YAXIS_COLOR;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -288,9 +338,10 @@ export class Scrollbar implements I.Scrollbar {
   setXThumbColor( color: string ) {
     if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
     this.options.customizeOptions.xThumbColor = color;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.XTHUMB_COLOR;
+    if ( update ) { this.update(); }
   }
 
   /**
@@ -299,9 +350,10 @@ export class Scrollbar implements I.Scrollbar {
   setYThumbColor( color: string ) {
     if ( color == null || typeof color !== 'string' ) { console.error( 'Invalid color' ); }
     this.options.customizeOptions.yThumbColor = color;
-    if ( update ) {
-      this.update();
-    }
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.YTHUMB_COLOR;
+    if ( update ) { this.update(); }
   }
 
   /**

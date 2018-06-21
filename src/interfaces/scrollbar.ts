@@ -76,6 +76,16 @@ export type ScrollIntoViewOptions = {
   offsetBottom: number,
 };
 
+export interface SCROLL_RENDER {
+  CONTENT_SIZE: number,
+  XAXIS_SIZE: number,
+  YAXIS_SIZE: number,
+  XAXIS_COLOR: number
+  YAXIS_COLOR: number,
+  XTHUMB_COLOR: number,
+  YTHUMB_COLOR: number
+}
+
 export interface AddTransformableMomentumCallback {
   (this: Scrollbar, willScroll: boolean): void;
 }
@@ -104,7 +114,18 @@ export interface Scrollbar {
 
   update(): void;
   getSize(): ScrollbarSize;
+  getRenderMask(): number;
+  getRenderFlags(): SCROLL_RENDER;
   isVisible(elem: HTMLElement): boolean;
+
+  setRenderMask( value: number ): void;
+  setContentSize( size: Metrics ): void;
+  setXAxisSize( size: number ): void;
+  setYAxisSize( size: number ): void;
+  setXAxisColor( color: string ): void;
+  setYAxisColor( color: string ): void;
+  setXThumbColor( color: string ): void;
+  setYThumbColor( color: string ): void;
 
   addListener(fn: ScrollListener): void;
   removeListener(fn: ScrollListener): void;
