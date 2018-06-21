@@ -84,25 +84,6 @@ function updateMainScrollbar() {
   }
 }
 
-// function updateInnerScrollbar() {
-//   let s1 = scrollbars[1];
-
-//   // real-time options for inner-scrollbar
-//   Object.assign(s1.options, optionsInner);
-//   s1.updatePluginOptions('overscroll', {
-//     ...overscrollOptions,
-//     effect: overscrollOptions.enable ? overscrollOptions.effect : undefined,
-//   });
-
-//   if (options.alwaysShowTracks) {
-//     s1.track.xAxis.show();
-//     s1.track.yAxis.show();
-//   } else {
-//     s1.track.xAxis.hide();
-//     s1.track.yAxis.hide();
-//   }
-// }
-
 function updateMainStyles( ctrl ) {
   let property = ctrl.property;
   let value = ctrl.getValue();
@@ -122,7 +103,7 @@ function updateMainStyles( ctrl ) {
   }
 }
 
-function updateInnerStyles( ctrl: dat.GUIController ) {
+function updateInnerStyles( ctrl ) {
   let property = ctrl.property;
   let value = ctrl.getValue();
   let s1 = scrollbars[1];
