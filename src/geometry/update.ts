@@ -27,37 +27,37 @@ export function update(scrollbar: Scrollbar) {
     let renderMask = scrollbar.getRenderMask();
     let renderFlags = scrollbar.getRenderFlags();
 
-    if ( ( renderMask & renderFlags.CONTENT_SIZE ) && ( options.contentWidth != null ) ) {
+    if ( ( renderMask & renderFlags.contentSize ) && ( options.contentWidth != null ) ) {
       scrollbar.contentEl.style.width = options.contentWidth + 'px';
     }
 
-    if ( ( renderMask & renderFlags.CONTENT_SIZE ) && ( options.contentHeight != null ) ) {
+    if ( ( renderMask & renderFlags.contentSize ) && ( options.contentHeight != null ) ) {
       scrollbar.contentEl.style.height = options.contentHeight + 'px';
     }
 
-    if ( ( renderMask & renderFlags.XAXIS_SIZE ) && ( options.xAxisSize != null ) ) {
+    if ( ( renderMask & renderFlags.xAxisSize ) && ( options.xAxisSize != null ) ) {
       scrollbar.track.xAxis.element.style.height = options.xAxisSize + 'px';
       scrollbar.track.xAxis.thumb.element.style.height = options.xAxisSize + 'px';
     }
 
-    if ( ( renderMask & renderFlags.YAXIS_SIZE ) && ( options.yAxisSize != null ) ) {
+    if ( ( renderMask & renderFlags.yAxisSize ) && ( options.yAxisSize != null ) ) {
       scrollbar.track.yAxis.element.style.width = options.yAxisSize + 'px';
       scrollbar.track.yAxis.thumb.element.style.width = options.yAxisSize + 'px';
     }
 
-    if ( ( renderMask & renderFlags.XAXIS_COLOR ) && ( options.xAxisColor != null ) ) {
+    if ( ( renderMask & renderFlags.xAxisColor ) && ( options.xAxisColor != null ) ) {
       scrollbar.track.xAxis.element.style.backgroundColor = options.xAxisColor;
     }
 
-    if ( ( renderMask & renderFlags.YAXIS_COLOR ) && ( options.yAxisColor != null ) ) {
+    if ( ( renderMask & renderFlags.yAxisColor ) && ( options.yAxisColor != null ) ) {
       scrollbar.track.yAxis.element.style.backgroundColor = options.yAxisColor;
     }
 
-    if ( ( renderMask & renderFlags.XTHUMB_COLOR ) && ( options.xThumbColor != null ) ) {
+    if ( ( renderMask & renderFlags.xThumbColor ) && ( options.xThumbColor != null ) ) {
       scrollbar.track.xAxis.thumb.element.style.backgroundColor = options.xThumbColor;
     }
 
-    if ( ( renderMask & renderFlags.YTHUMB_COLOR ) && ( options.yThumbColor != null ) ) {
+    if ( ( renderMask & renderFlags.yThumbColor ) && ( options.yThumbColor != null ) ) {
       scrollbar.track.yAxis.thumb.element.style.backgroundColor = options.yThumbColor;
     }
 
