@@ -31,12 +31,13 @@ In this documentation, we are using `Scrollbar` (in capitalized) to represent th
   - [scrollbar.track](#scrollbartrack)
   - [scrollbar.getSize()](#scrollbargetsize)
   - [scrollbar.setContentSize()](#scrollbarsetcontentsize)
-  - [scrollbar.setXAxisSize()](#scrollbarsetcontentsize)
-  - [scrollbar.setYAxisSize()](#scrollbarsetcontentsize)
-  - [scrollbar.setXAxisColor()](#scrollbarsetcontentsize)
-  - [scrollbar.setYAxisColor()](#scrollbarsetcontentsize)
-  - [scrollbar.setXThumbColor()](#scrollbarsetcontentsize)
-  - [scrollbar.setYThumbColor()](#scrollbarsetcontentsize)
+  - [scrollbar.setXAxisSize()](#scrollbarsetxaxissize)
+  - [scrollbar.setYAxisSize()](#scrollbarsetyaxissize)
+  - [scrollbar.setXAxisColor()](#scrollbarsetxaxiscolor)
+  - [scrollbar.setYAxisColor()](#scrollbarsetyaxiscolor)
+  - [scrollbar.setXThumbColor()](#scrollbarsetxthumbcolor)
+  - [scrollbar.setYThumbColor()](#scrollbarsetythumbcolor)
+  - [scrollbar.setInnerOffset()](#scrollbarsetinneroffset)
   - [scrollbar.update()](#scrollbarupdate)
   - [scrollbar.setPosition()](#scrollbarsetposition)
   - [scrollbar.scrollTo()](#scrollbarscrollto)
@@ -433,7 +434,7 @@ Returns the size of the scrollbar container element and the content wrapper elem
 ### scrollbar.setContentSize()
 
 ```js
-scrollbar.setContentSize(size): void
+scrollbar.setContentSize( size )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
@@ -456,7 +457,7 @@ var size = {
   height: 500
 };
 
-scrollbar.setContentSize(size);
+scrollbar.setContentSize(size)
 
 // Changed options
 console.log(scrollbar.options.contentWidth); // 500
@@ -466,7 +467,7 @@ console.log(scrollbar.options.contentHeight); // 500
 ### scrollbar.setXAxisSize()
 
 ```js
-scrollbar.setXAxisSize( size: number ): void
+scrollbar.setXAxisSize( size )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
@@ -475,7 +476,7 @@ scrollbar.setXAxisSize( size: number ): void
 ### scrollbar.setYAxisSize()
 
 ```js
-scrollbar.setYAxisSize( size: number ): void
+scrollbar.setYAxisSize( size )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
@@ -484,38 +485,47 @@ scrollbar.setYAxisSize( size: number ): void
 ### scrollbar.setXAxisColor()
 
 ```js
-scrollbar.setXAxisColor( color: string ): void
+scrollbar.setXAxisColor( color )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
-| `color` | `number` | Color of x axis track |
+| `color` | `string` | Color of x axis track |
 
 ### scrollbar.setYAxisColor()
 
 ```js
-scrollbar.setYAxisColor( color: string ): void
+scrollbar.setYAxisColor( color )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
-| `color` | `number` | Color of y axis track |
+| `color` | `string` | Color of y axis track |
 
 ### scrollbar.setXThumbColor()
 
 ```js
-scrollbar.setXThumbColor( color: string ): void
+scrollbar.setXThumbColor( color )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
-| `color` | `number` | Color of x axis thumb |
+| `color` | `string` | Color of x axis thumb |
 
 ### scrollbar.setYThumbColor()
 
 ```js
-scrollbar.setYThumbColor( color: string ): void
+scrollbar.setYThumbColor( color )
 ```
 | Param | Type | Description |
 | --- | :-: | --- |
-| `color` | `number` | Color of y axis thumb |
+| `color` | `string` | Color of y axis thumb |
+
+### scrollbar.setInnerOffset()
+
+```js
+scrollbar.setInnerOffse( offset )
+```
+| Param | Type | Description |
+| --- | :-: | --- |
+| `offset` | `number` | Value of inner x/y scroll track offset |
 
 ### scrollbar.update()
 

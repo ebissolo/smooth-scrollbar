@@ -13,6 +13,7 @@ export type Customizations = {
   yAxisColor: string | null,
   xThumbColor: string | null,
   yThumbColor: string | null,
+  innerOffset: number
 };
 
 // Scrollbar.options
@@ -31,6 +32,11 @@ export type ScrollbarOptions = {
 export type Metrics = {
   width: number,
   height: number,
+};
+
+export type Size = {
+  width: number | null,
+  height: number | null
 };
 
 export type ScrollbarSize = {
@@ -84,6 +90,7 @@ export type ScrollRender = {
   yAxisColor: number,
   xThumbColor: number,
   yThumbColor: number,
+  innerOffset: number
 };
 export interface AddTransformableMomentumCallback {
   (this: Scrollbar, willScroll: boolean): void;
@@ -118,7 +125,7 @@ export interface Scrollbar {
   isVisible(elem: HTMLElement): boolean;
 
   setRenderMask( value: number ): void;
-  setContentSize( size: Metrics ): void;
+  setContentSize( size: Size ): void;
   setXAxisSize( size: number ): void;
   setYAxisSize( size: number ): void;
   setXAxisColor( color: string ): void;

@@ -67,6 +67,7 @@ export class Options {
     yAxisColor: null,
     xThumbColor: null,
     yThumbColor: null,
+    innerOffset: 0,
   };
 
   constructor(config: Partial<ScrollbarOptions> = {}) {

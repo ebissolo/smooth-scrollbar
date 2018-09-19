@@ -61,6 +61,11 @@ export function update(scrollbar: Scrollbar) {
       scrollbar.track.yAxis.thumb.element.style.backgroundColor = options.yThumbColor;
     }
 
+    if ( ( renderMask & renderFlags.innerOffset ) && ( options.innerOffset != null ) ) {
+      scrollbar.track.yAxis.element.style.marginRight = options.innerOffset + 'px';
+      scrollbar.track.xAxis.element.style.marginBottom = options.innerOffset + 'px';
+    }
+
     scrollbar.setRenderMask( 0 );
   }
 

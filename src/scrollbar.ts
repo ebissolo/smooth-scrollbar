@@ -34,7 +34,7 @@ import {
 import * as eventHandlers from './events/';
 
 import * as I from './interfaces/';
-import { Metrics, ScrollRender } from './interfaces/';
+import { Size, ScrollRender } from './interfaces/';
 
 // DO NOT use WeakMap here
 // .getAll() methods requires `scrollbarMap.values()`
@@ -151,6 +151,7 @@ export class Scrollbar implements I.Scrollbar {
       yAxisColor: 16,
       xThumbColor: 32,
       yThumbColor: 64,
+      innerOffset: 128,
     };
 
     this.containerEl = containerEl;
@@ -199,7 +200,8 @@ export class Scrollbar implements I.Scrollbar {
                        this._renderFlags.xAxisColor |
                        this._renderFlags.yAxisColor |
                        this._renderFlags.xThumbColor |
-                       this._renderFlags.yThumbColor;
+                       this._renderFlags.yThumbColor |
+                       this._renderFlags.innerOffset;
 
     // preserve scroll offset
     const { scrollLeft, scrollTop } = containerEl;
@@ -265,7 +267,7 @@ export class Scrollbar implements I.Scrollbar {
    * Sets content size and update geometry
    * @param size
    */
-  setContentSize( size: Metrics ) {
+  setContentSize( size: Size ) {
     if ( size == null ) { console.error( 'Invalid size' ); return; }
 
     let update: boolean = false;
@@ -281,7 +283,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.contentSize;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -293,7 +300,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.xAxisSize;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -305,7 +317,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.yAxisSize;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -317,7 +334,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.xAxisColor;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -329,7 +351,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.yAxisColor;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -341,7 +368,12 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.xThumbColor;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**
@@ -353,7 +385,30 @@ export class Scrollbar implements I.Scrollbar {
 
     // Update scrollbar
     this._renderMask |= this._renderFlags.yThumbColor;
-    if ( update ) { this.update(); }
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
+  }
+
+  /**
+   * @param  {number} offset
+   */
+  setInnerOffset( offset: number ) {
+    offset = Math.round( offset );
+    if ( offset === 0 || offset < 0 ) return;
+    this.options.customizeOptions.innerOffset = offset;
+
+    // Update scrollbar
+    this._renderMask |= this._renderFlags.innerOffset;
+
+    if ( update ) {
+      requestAnimationFrame( () => {
+        this.update();
+      } );
+    }
   }
 
   /**

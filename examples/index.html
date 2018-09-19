@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../dist/smooth-scrollbar.js"></script>
+		<style>
+			#div1 {
+				position: absolute;
+				left: 10px;
+				top: 100px;
+				width: 200px;
+				height: 200px;
+				display: block;
+				overflow: auto;
+			}
+			#div2 {
+				position: absolute;
+				left: 300px;
+				top: 300px;
+				width: 300px;
+				height: 500px;
+				display: block;
+				overflow: auto;
+			}
+			#div3 {
+				position: absolute;
+				left: 700px;
+				top: 300px;
+				width: 300px;
+				height: 400px;
+				display: block;
+				overflow: auto;
+			}
+			.child {
+				width: 1000px;
+				height: 900px;
+				background-color: beige;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div class="child">child of div 1</div>
+		</div>
+		<div id="div2">
+			<div class="child">child of div2</div>
+		</div>
+		<div id="div3">
+			<div class="child">child of div3</div>
+		</div>
+		<button onclick="getClientWidth()">Click me !</button>
+	</body>
+
+	<!-- SCRIPT -->
+	<script type="text/javascript">
+
+		function getClientWidth() {
+			var div1 = document.getElementById( "div1" );
+			var clientWidth = div1.clientWidth;
+			var clientHeight = div1.clientHeight;
+		}
+
+		var scroll1 = window.Scrollbar;
+		var scroll2 = window.Scrollbar;
+		var scroll3 = window.Scrollbar;
+
+		scroll1.init( document.getElementById( "div1" ), { alwaysShowTracks: true, customizeOptions: {
+			contentWidth: 1000,
+			contentHeight: 4000,
+			xAxisSize: 20,
+			yAxisSize: 20,
+			xAxisColor: 'gray',
+			yAxisColor: 'gray',
+			xThumbColor: 'black',
+			yThumbColor: 'black',
+		}, } );
+		  
+		scroll2.init( document.getElementById( "div2" ), { alwaysShowTracks: true, customizeOptions: {
+			contentWidth: 1000,
+			contentHeight: 4000,
+			xAxisSize: 20,
+			yAxisSize: 20,
+			xAxisColor: 'green',
+			yAxisColor: 'green',
+			xThumbColor: 'orange',
+			yThumbColor: 'blue',
+  		}, } );
+		scroll2.init( document.getElementById( "div3" ), { alwaysShowTracks: true, customizeOptions: {
+			contentWidth: 1000,
+			contentHeight: 4000,
+			xAxisSize: 20,
+			yAxisSize: 20,
+			xAxisColor: '#ececec',
+			yAxisColor: '#ececec',
+			xThumbColor: 'blue',
+			yThumbColor: 'blue',
+		}, } );
+	</script>
+</html>

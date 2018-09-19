@@ -19,6 +19,7 @@ const options = {
     yAxisColor: 'gray',
     xThumbColor: 'black',
     yThumbColor: 'black',
+    innerOffset: 0,
   },
 };
 
@@ -37,6 +38,7 @@ const optionsInner = {
     yAxisColor: 'gray',
     xThumbColor: 'black',
     yThumbColor: 'black',
+    innerOffset: 0,
   },
 };
 
@@ -91,8 +93,10 @@ function updateMainStyles( ctrl ) {
 
   switch ( property ) {
     case 'contentWidth':
+      s0.setContentSize( { width: value, height: null } );
+      break;
     case 'contentHeight':
-      s0.setContentSize(value);
+      s0.setContentSize( { width: null, height: value } );
       break;
     case 'xAxisSize': s0.setXAxisSize(value);break;
     case 'yAxisSize': s0.setYAxisSize(value);break;
@@ -100,6 +104,7 @@ function updateMainStyles( ctrl ) {
     case 'yAxisColor': s0.setYAxisColor(value);break;
     case 'xThumbColor': s0.setXThumbColor(value);break;
     case 'yThumbColor': s0.setYThumbColor(value);break;
+    case 'innerOffset': s0.setInnerOffset(value);break;
   }
 }
 
@@ -110,8 +115,10 @@ function updateInnerStyles( ctrl ) {
 
   switch ( property ) {
     case 'contentWidth':
+      s1.setContentSize( { width: value, height: null } );
+      break;
     case 'contentHeight':
-      s1.setContentSize(value);
+      s1.setContentSize( { width: null, height: value } );
       break;
     case 'xAxisSize': s1.setXAxisSize(value);break;
     case 'yAxisSize': s1.setYAxisSize(value);break;
@@ -119,6 +126,7 @@ function updateInnerStyles( ctrl ) {
     case 'yAxisColor': s1.setYAxisColor(value);break;
     case 'xThumbColor': s1.setXThumbColor(value);break;
     case 'yThumbColor': s1.setYThumbColor(value);break;
+    case 'innerOffset': s1.setInnerOffset(value);break;
   }
 }
 
@@ -158,6 +166,7 @@ f3.open();
   f3.add( options.customizeOptions, 'yAxisColor' ),
   f3.add( options.customizeOptions, 'xThumbColor' ),
   f3.add( options.customizeOptions, 'yThumbColor' ),
+  f3.add( options.customizeOptions, 'innerOffset' ),
 ].forEach((ctrl) => {
   let controller = ctrl;
   ctrl.onChange(() => {
@@ -177,6 +186,7 @@ f4.open();
   f4.add( optionsInner.customizeOptions, 'yAxisColor' ),
   f4.add( optionsInner.customizeOptions, 'xThumbColor' ),
   f4.add( optionsInner.customizeOptions, 'yThumbColor' ),
+  f4.add( optionsInner.customizeOptions, 'innerOffset' ),
 ].forEach((ctrl) => {
   let controller = ctrl;
   ctrl.onChange(() => {
