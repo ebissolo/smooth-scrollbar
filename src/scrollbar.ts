@@ -216,7 +216,9 @@ export class Scrollbar implements I.Scrollbar {
     // observe
     if (typeof MutationObserver === 'function') {
       this._observer = new MutationObserver(() => {
-        this.update();
+        requestAnimationFrame(() => {
+          this.update();
+        });
       });
 
       this._observer.observe(contentEl, {
