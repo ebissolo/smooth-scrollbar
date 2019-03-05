@@ -137,6 +137,7 @@ export class Scrollbar implements I.Scrollbar {
 
   private _renderMask = 0;
   private _renderFlags: ScrollRender;
+  private _disableMutationObserver: boolean = true;
 
   constructor(
     containerEl: HTMLElement,
@@ -214,7 +215,7 @@ export class Scrollbar implements I.Scrollbar {
     const MutationObserver = global.MutationObserver || global.WebKitMutationObserver || global.MozMutationObserver;
 
     // observe
-    if (typeof MutationObserver === 'function') {
+    if (typeof MutationObserver === 'function' && !this._disableMutationObserver) {
       this._observer = new MutationObserver(() => {
         requestAnimationFrame(() => {
           this.update();

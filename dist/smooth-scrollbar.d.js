@@ -3725,6 +3725,7 @@ var Scrollbar = /** @class */ (function () {
         this._momentum = { x: 0, y: 0 };
         this._listeners = new Set();
         this._renderMask = 0;
+        this._disableMutationObserver = true;
         this._renderFlags = {
             contentSize: 1,
             xAxisSize: 2,
@@ -3781,7 +3782,7 @@ var Scrollbar = /** @class */ (function () {
         var global = window;
         var MutationObserver = global.MutationObserver || global.WebKitMutationObserver || global.MozMutationObserver;
         // observe
-        if (typeof MutationObserver === 'function') {
+        if (typeof MutationObserver === 'function' && !this._disableMutationObserver) {
             this._observer = new MutationObserver(function () {
                 requestAnimationFrame(function () {
                     _this.update();
