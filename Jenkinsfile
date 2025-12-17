@@ -10,15 +10,15 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Install') {
             steps {
-                echo 'Build in corso...'
+                sh 'npm install'
             }
         }
 
-        stage('Test') {
+        stage('Run bundle:main') {
             steps {
-                echo 'Test in corso...'
+                sh 'npm run bundle:main'
             }
         }
     }
