@@ -29,6 +29,8 @@ declare var __SCROLLBAR_VERSION__: string;
  * @see https://github.com/Microsoft/TypeScript/issues/2672
  */
 
+// test
+
 export default class SmoothScrollbar extends Scrollbar {
   static version = __SCROLLBAR_VERSION__;
 
