@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment {
+        NODE_HOME = "/var/jenkins_home/node-v24.4.0-linux-arm64"
+        PATH = "/var/jenkins_home/node-v24.4.0-linux-arm64/bin:${env.PATH}"
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -10,9 +13,13 @@ pipeline {
             }
         }
 
-        stage('Install') {
+        stage('Run npm nstall') {
             steps {
-                sh 'npm install'
+                sh '''
+                  node -v
+                  npm -v
+                  npm install
+                '''
             }
         }
 
